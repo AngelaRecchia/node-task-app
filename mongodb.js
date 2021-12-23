@@ -50,15 +50,49 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //     console.log(users)
     // })
 
-    // // find task by id
-    db.collection('tasks').findOne({_id: new ObjectID("61c30db2edcd4d269b779774")}, (error, task) => {
+    // find task by id
+    db.collection('tasks').findOne({_id: new ObjectID("61c30db2edcd4d269b779772")}, (error, task) => {
         if (error) return console.log('Unable to find task')
-        console.log(task);
+        console.log(task)
     })
 
-    // find tasks that ara not completed
-    db.collection('tasks').find({completed: false}).toArray((error, tasks) => {
-        console.log(tasks)
-    })
+    // // find tasks that ara not completed
+    // db.collection('tasks').find({completed: false}).toArray((error, tasks) => {
+    //     console.log(tasks)
+    // })
 
+
+    // update one user
+    // db.collection('users').updateOne(
+    //     {
+    //         _id: new ObjectID("61c307fa6a4299d2a7b8eea5")
+    //     }, 
+    //     {
+    //         $set: {name: "Jojo"}
+    //     })
+    //     .then((result) => {console.log(result)})
+    //     .catch((error) => {console.log(error)})
+
+    // update many: set all tasks as completed
+    // db.collection('tasks').updateMany(
+    //     {
+    //         completed: false
+    //     },
+    //     {
+    //         $set: {completed: true}
+    //     }
+    // ).then((result) => {console.log(result)})
+    // .catch((error) => {console.log(error)})
+
+    // delete users with age = 27 
+    // db.collection('users').deleteMany(
+    //     {age: 27}
+    // ).then((result) => {console.log(result)})
+    //  .catch((error) => {console.log(error)})
+
+    // delete one task by description
+    // db.collection('tasks').deleteOne(
+    //     {description: "Find a job"}
+    // ).then((result) => {console.log(result)})
+    //  .catch((error) => {console.log(error)})
 })
