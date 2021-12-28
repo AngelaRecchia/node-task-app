@@ -45,7 +45,21 @@ const userSchema = new mongoose.Schema({
         }]
 })
 
+// set relationship with tasks
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'owner'
+})
 
+userSchema.methods.toJSON = function () {
+    let userObject = this.toObject()
+    delete userObject.password
+    delete userObject.tokens
+    return userObject
+}
+
+// create method: on instance user
 userSchema.methods.generateAuthToken = async function () {
     const token = jwt.sign({_id: this._id.toString()}, 'thisisastring')
 
@@ -54,7 +68,7 @@ userSchema.methods.generateAuthToken = async function () {
     return token
 }
 
-//create new method
+//create new method: on User
 userSchema.statics.findByCredentials = async (email, password)=> {
     const user = await User.findOne({email})
 
