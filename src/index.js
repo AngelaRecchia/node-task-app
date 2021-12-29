@@ -1,9 +1,4 @@
-const express = require('express')
-require('./DB/mongoose')
-const userRouter = require('./routers/user')
-const taskRouter = require('./routers/task')
-
-const app = express()
+const app = require('./app')
 const port = process.env.PORT
 
 // maintenance mode
