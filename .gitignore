@@ -1,4 +1,2 @@
 node_modules
-package-lock.json
-sendgrid.env
-dev.env
+config
