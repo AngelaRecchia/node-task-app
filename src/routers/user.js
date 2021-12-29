@@ -4,6 +4,7 @@ const auth = require('../middleware/auth')
 const multer = require('multer')
 const router = new express.Router()
 const sharp = require('sharp')
+const { sendWelcome, sendBye } = require('../emails/account')
 
 // setup multer to save pics in folder avatars
 const upload = multer({
@@ -57,6 +58,7 @@ router.get('/users/:id/avatar', async (req, res) => {
 router.post('/users',  async (req, res) => {
     try {
         const user = new User(req.body)
+        sendWelcome(user.email, user.name)
         const token = await user.generateAuthToken()
         await user.save()
         res.status(201).send({user, token})
@@ -137,6 +139,7 @@ router.patch('/users/me', auth, async (req, res) => {
 
 router.delete('/users/me', auth, async (req, res) => {
     try {
+        sendBye(req.user.email, req.user.name)
         await req.user.remove()
         res.send(req.user)
     } catch (e) {

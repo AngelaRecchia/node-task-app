@@ -1,3 +1,3 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/task-app-api')
+mongoose.connect(process.env.MONGODB_URL)
